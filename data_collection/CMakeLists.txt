@@ -7,11 +7,10 @@ add_compile_options(-std=c++11)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED COMPONENTS
+find_package(ament_cmake REQUIRED COMPONENTS
+  rclcpp REQUIRED
   gazebo_msgs
   geometry_msgs
-  roscpp
-  rospy
   sensor_msgs
   std_msgs
   turtlebot3_social
@@ -110,12 +109,12 @@ generate_messages(
 ## LIBRARIES: libraries you create in this project that dependent projects also need
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
-catkin_package(
+#catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES data_collection
 #  CATKIN_DEPENDS actor_plugins gazebo_msgs geometry_msgs roscpp rospy std_msgs turtlebot3_social
 #  DEPENDS system_lib
-)
+#)
 
 ###########
 ## Build ##
@@ -125,7 +124,7 @@ catkin_package(
 ## Your package locations should be listed before other locations
 include_directories(
 # include
-  ${catkin_INCLUDE_DIRS}
+  #${catkin_INCLUDE_DIRS}
 )
 
 include_directories(./include)
@@ -146,7 +145,7 @@ include_directories(./include)
 # add_executable(${PROJECT_NAME}_node src/data_collection_node.cpp)
 
 add_executable(data_collection_node src/main.cpp src/data_collection.cpp)
-target_link_libraries(data_collection_node ${catkin_LIBRARIES})
+ament_target_dependencies(data_collection_node rclcpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the

@@ -2,9 +2,9 @@ cmake_minimum_required(VERSION 2.8.3)
 project(actor_plugin)
 
 
-find_package(roscpp REQUIRED)
+find_package(rclcpp REQUIRED)
 find_package(actor_services REQUIRED)
-find_package(tf REQUIRED)
+find_package(tf2_ros REQUIRED)
 find_package(std_msgs REQUIRED)
 include_directories(${roscpp_INCLUDE_DIRS})
 include_directories(${actor_services_INCLUDE_DIRS})
