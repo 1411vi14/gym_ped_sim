@@ -7,20 +7,20 @@ Info:
     '''
 
 #!/usr/bin/env python  
-import rospy
-import tf
+import rclpy
+import tf2_ros
 import numpy as np
 from gazebo_msgs.msg import ModelStates
 
 class MountTB2Ped(object):
     
     def __init__(self):
-        self.br = tf.TransformBroadcaster()
-        self.actor_name = rospy.get_param("TB3_WITH_ACTOR")
-        self.actor_number = rospy.get_param("ACTOR_NUMBER")
+        self.br = tf2_ros.TransformBroadcaster()
+        self.actor_name = rclpy.get_param("TB3_WITH_ACTOR")
+        self.actor_number = rclpy.get_param("ACTOR_NUMBER")
         self.robot_pose = None
         self.robot_quat = None
-        self.model_sub = rospy.Subscriber("/gazebo/model_states", ModelStates, self.callback)
+        self.model_sub = rclpy.Subscriber("/gazebo/model_states", ModelStates, self.callback)
         
 
     def callback(self, data):
@@ -30,10 +30,10 @@ class MountTB2Ped(object):
             actor_quat_ = self.quat_trans(data.pose[actor_idx_].orientation)
             self.br.sendTransform((actor_pose_.x, actor_pose_.y, 0),
                     (actor_quat_.x, actor_quat_.y, actor_quat_.z, actor_quat_.w),
-                    rospy.Time.now(),
+                    rclpy.Time.now(),
                     self.actor_name[:-1]+str(item),
                     "default_world")
-            print self.actor_name[:-1]+str(item)
+            print (self.actor_name[:-1])+str(item)
             #if item == str(self.actor_name[-1]):
                 #self.robot_pose = actor_pose_
                 #self.robot_quat = actor_quat_
@@ -57,36 +57,47 @@ class MountTB2Ped(object):
         #self.model_set.publish(self.tb3modelstate) 
         #self.br.sendTransform((0,0,0),
                 #(0, 0, 0, 1),
-                #rospy.Time.now(),
+                #rclpy.Time.now(),
                 #"odom",
                 #self.actor_name)
     
     def quat_trans(self, quat):
-        euler = tf.transformations.euler_from_quaternion((quat.x,quat.y,quat.z,quat.w))
-        quat_ = tf.transformations.quaternion_from_euler(euler[0]-0.5*np.pi, euler[1], euler[2]-0.5*np.pi) 
+        euler = tf2_ros.transformations.euler_from_quaternion((quat.x,quat.y,quat.z,quat.w))
+        quat_ = tf2_ros.transformations.quaternion_from_euler(euler[0]-0.5*np.pi, euler[1], euler[2]-0.5*np.pi) 
         quat.x = quat_[0]
         quat.y = quat_[1]
         quat.z = quat_[2]
         quat.w = quat_[3]
         return quat
 
-if __name__ == '__main__':
-    
-    rospy.init_node('tf2defaultworld')
-    MountTB2Ped()
-    rospy.spin()
-    
+def main(args=None):
+    rclpy.init(args=args)
+    tf2defaultworld = MountTB2Ped()
+
+    tf2defaultworld.get_logger().info('Created node')
+
+    rclpy.spin(tf2defaultworld)
     #target_x = -0.5
     #target_y = -5
     
-    #br = tf.TransformBroadcaster()
-    #rate = rospy.Rate(100)
-    #while not rospy.is_shutdown():
-        #target_x = rospy.get_param("TARGET_X")
-        #target_y = rospy.get_param("TARGET_Y")
+    #br = tf2_ros.TransformBroadcaster()
+    #rate = rclpy.Rate(100)
+    #while not rclpy.is_shutdown():
+        #target_x = rclpy.get_param("TARGET_X")
+        #target_y = rclpy.get_param("TARGET_Y")
         #br.sendTransform((target_x, target_y, 0.0),
                 #(0.0, 0.0, 0.0, 1.0),
-                #rospy.Time.now(),
+                #rclpy.Time.now(),
                 #"target_pose",
                 #"default_world")
         #rate.sleep()
+
+    # Destroy the node explicitly
+    # (optional - otherwise it will be done automatically
+    # when the garbage collector destroys the node object)
+    tf2defaultworld.destroy_node()
+    rclpy.shutdown()
+
+
+if __name__ == '__main__':
+    main()

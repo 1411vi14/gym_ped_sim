@@ -7,20 +7,34 @@ Info:
     '''
 
 #!/usr/bin/env python  
-import roslib
-import rospy
+import rclpy
 import tf2_ros
 import numpy as np
 
-if __name__ == '__main__':
-    
-    rospy.init_node('tfodom2defaultworld')
+def main(args=None):
+    rclpy.init(args=args)
+
+    node = rclpy.create_node('tfodom2defaultworld')
+
+    node.get_logger().info('Created node')
+
     br = tf2_ros.TransformBroadcaster()
-    rate = rospy.Rate(100)
-    while not rospy.is_shutdown():
+    rate = rclpy.Rate(100)
+    while rclpy.ok():
         br.sendTransform((0, 0, 0.0),
                 (0.0, 0.0, 0.0, 1.0),
-                rospy.Time.now(),
+                rclpy.Time.now(),
                 "odom",
                 "default_world")
         rate.sleep()
+
+    # Destroy the node explicitly
+    # (optional - otherwise it will be done automatically
+    # when the garbage collector destroys the node object)
+    node.destroy_node()
+    rclpy.shutdown()
+
+
+if __name__ == '__main__':
+    main()
+    
