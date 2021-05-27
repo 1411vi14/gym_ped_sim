@@ -7,7 +7,7 @@ Info:
     '''
 
 #!/usr/bin/env python  
-import tf
+import tf2_ros
 import rclpy
 from rclpy.node import Node
 
@@ -26,7 +26,7 @@ class MountTB2Ped(Node):
             "/gazebo/model_states",
             self.callback,
             1)#1?
-        self.br = tf.TransformBroadcaster()
+        self.br = tf2_ros.TransformBroadcaster()
         self.model_set = self.create_publisher(ModelState, "/gazebo/set_model_state", 1)
 
         self.tb3modelstate = ModelState()
@@ -65,8 +65,8 @@ class MountTB2Ped(Node):
                 self.actor_name)
 
     def quat_trans(self, quat):
-        euler = tf.transformations.euler_from_quaternion((quat.x,quat.y,quat.z,quat.w))
-        quat_ = tf.transformations.quaternion_from_euler(euler[0]-0.5*np.pi, euler[1], euler[2]-0.5*np.pi)
+        euler = tf2_ros.transformations.euler_from_quaternion((quat.x,quat.y,quat.z,quat.w))
+        quat_ = tf2_ros.transformations.quaternion_from_euler(euler[0]-0.5*np.pi, euler[1], euler[2]-0.5*np.pi)
         quat.x = quat_[0]
         quat.y = quat_[1]
         quat.z = quat_[2]
