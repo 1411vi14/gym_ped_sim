@@ -7,24 +7,31 @@ Info:
     '''
 
 #!/usr/bin/env python  
-import roslib
-import rospy
 import tf
+import rclpy
+from rclpy.node import Node
+
+from std_msgs.msg import String
 from gazebo_msgs.msg import ModelStates
 from gazebo_msgs.msg import ModelState
 from gazebo_msgs.srv import SetModelState
 import numpy as np
 
-class MountTB2Ped(object):
+class MountTB2Ped(Node):
 
     def __init__(self):
-        self.model_sub = rospy.Subscriber("/gazebo/model_states", ModelStates, self.callback)
+        super().__init__('tf2defaultworld')
+        self.model_sub = self.create_subscription(
+            ModelStates,
+            "/gazebo/model_states",
+            self.callback,
+            1)#1?
         self.br = tf.TransformBroadcaster()
-        self.model_set = rospy.Publisher("/gazebo/set_model_state", ModelState,queue_size=1)
+        self.model_set = self.create_publisher(ModelState, "/gazebo/set_model_state", 1)
 
         self.tb3modelstate = ModelState()
         self.tb3modelstate.model_name="turtlebot3_burger"
-        self.actor_name = rospy.get_param("TB3_WITH_ACTOR")
+        self.actor_name = rclpy.get_param("TB3_WITH_ACTOR")
     def callback(self, data):
         #tb3_idx = data.name.index("turtlebot3_burger")
         actor_idx = data.name.index(self.actor_name)
@@ -32,7 +39,7 @@ class MountTB2Ped(object):
         #tb3_orien = data.pose[tb3_idx].orientation
         #br.sendTransform((tb3_pose.x, tb3_pose.y, tb3_pose.z),
                 #(tb3_orien.x, tb3_orien.y, tb3_orien.z, tb3_orien.w),
-                #rospy.Time.now(),
+                #rclpy.Time.now(),
                 #"tb3",
                 #"default_world")
         actor_pose = data.pose[actor_idx].position
@@ -53,7 +60,7 @@ class MountTB2Ped(object):
         self.model_set.publish(self.tb3modelstate)
         self.br.sendTransform((0,0,0),
                 (0, 0, 0, 1),
-                rospy.Time.now(),
+                rclpy.Time.now(),
                 "odom",
                 self.actor_name)
 
@@ -65,23 +72,21 @@ class MountTB2Ped(object):
         quat.z = quat_[2]
         quat.w = quat_[3]
         return quat
+
+def main(args=None):
+    rclpy.init(args=args)
+    tf2defaultworld = MountTB2Ped()
+
+    tf2defaultworld.get_logger().info('Created node')
+
+    rclpy.spin(tf2defaultworld)
+
+    # Destroy the node explicitly
+    # (optional - otherwise it will be done automatically
+    # when the garbage collector destroys the node object)
+    tf2defaultworld.destroy_node()
+    rclpy.shutdown()
+
+
 if __name__ == '__main__':
-
-    rospy.init_node('tf2defaultworld')
-    MountTB2Ped()
-    rospy.spin()
-
-    #target_x = -0.5
-    #target_y = -5
-
-    #br = tf.TransformBroadcaster()
-    #rate = rospy.Rate(100)
-    #while not rospy.is_shutdown():
-        #target_x = rospy.get_param("TARGET_X")
-        #target_y = rospy.get_param("TARGET_Y")
-        #br.sendTransform((target_x, target_y, 0.0),
-                #(0.0, 0.0, 0.0, 1.0),
-                #rospy.Time.now(),
-                #"target_pose",
-                #"default_world")
-        #rate.sleep()
+    main()
