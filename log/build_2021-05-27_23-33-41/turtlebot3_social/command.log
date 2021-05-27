@@ -1,0 +1,2 @@
+Invoking command in '/home/david/ros2_ws/src/gym_ped_sim/build/turtlebot3_social': /usr/bin/cmake /home/david/ros2_ws/src/gym_ped_sim/turtlebot3_social -DCATKIN_INSTALL_INTO_PREFIX_ROOT=0 -DCMAKE_INSTALL_PREFIX=/home/david/ros2_ws/src/gym_ped_sim/install/turtlebot3_social
+Invoked command in '/home/david/ros2_ws/src/gym_ped_sim/build/turtlebot3_social' returned '1': /usr/bin/cmake /home/david/ros2_ws/src/gym_ped_sim/turtlebot3_social -DCATKIN_INSTALL_INTO_PREFIX_ROOT=0 -DCMAKE_INSTALL_PREFIX=/home/david/ros2_ws/src/gym_ped_sim/install/turtlebot3_social

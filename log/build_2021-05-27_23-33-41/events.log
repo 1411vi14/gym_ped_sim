@@ -1,0 +1,55 @@
+[0.000000] (-) TimerEvent: {}
+[0.000484] (-) JobUnselected: {'identifier': 'actor_plugin'}
+[0.000592] (-) JobUnselected: {'identifier': 'actor_services'}
+[0.000990] (-) JobUnselected: {'identifier': 'data_collection'}
+[0.001250] (turtlebot3_social) JobQueued: {'identifier': 'turtlebot3_social', 'dependencies': OrderedDict()}
+[0.001424] (turtlebot3_social) JobStarted: {'identifier': 'turtlebot3_social'}
+[0.020557] (turtlebot3_social) JobProgress: {'identifier': 'turtlebot3_social', 'progress': 'cmake'}
+[0.020991] (turtlebot3_social) Command: {'cmd': ['/usr/bin/cmake', '/home/david/ros2_ws/src/gym_ped_sim/turtlebot3_social', '-DCATKIN_INSTALL_INTO_PREFIX_ROOT=0', '-DCMAKE_INSTALL_PREFIX=/home/david/ros2_ws/src/gym_ped_sim/install/turtlebot3_social'], 'cwd': '/home/david/ros2_ws/src/gym_ped_sim/build/turtlebot3_social', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('KDE_FULL_SESSION', 'true'), ('USER', 'david'), ('PAM_KWALLET5_LOGIN', '/run/user/1000/kwallet5.socket'), ('XDG_SEAT', 'seat0'), ('SSH_AGENT_PID', '1690'), ('XDG_SESSION_TYPE', 'x11'), ('GIT_ASKPASS', '/snap/code/65/usr/share/code/resources/app/extensions/git/dist/askpass.sh'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/foxy/opt/yaml_cpp_vendor/lib:/opt/ros/foxy/opt/rviz_ogre_vendor/lib:/opt/ros/foxy/lib/x86_64-linux-gnu:/opt/ros/foxy/lib'), ('HOME', '/home/david'), ('CHROME_DESKTOP', 'code-url-handler.desktop'), ('TERM_PROGRAM_VERSION', '1.56.2'), ('DESKTOP_SESSION', 'plasma'), ('APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL', 'true'), ('ROS_PYTHON_VERSION', '3'), ('GTK_RC_FILES', '/etc/gtk/gtkrc:/home/david/.gtkrc:/home/david/.config/gtkrc'), ('XDG_SEAT_PATH', '/org/freedesktop/DisplayManager/Seat0'), ('KDE_SESSION_VERSION', '5'), ('VSCODE_GIT_ASKPASS_MAIN', '/snap/code/65/usr/share/code/resources/app/extensions/git/dist/askpass-main.js'), ('VSCODE_GIT_ASKPASS_NODE', '/snap/code/65/usr/share/code/code'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('_colcon_cd_root', '/home/david/ros2_install'), ('BINPATH', 'home/david/.local/bin'), ('COLCON_PREFIX_PATH', '/home/david/ros2_ws/install'), ('ROS_DISTRO', 'foxy'), ('LOGNAME', 'david'), ('QT_AUTO_SCREEN_SCALE_FACTOR', '0'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('TERM', 'xterm-256color'), ('XDG_SESSION_ID', '3'), ('ROS_LOCALHOST_ONLY', '0'), ('GTK2_RC_FILES', '/etc/gtk-2.0/gtkrc:/home/david/.gtkrc-2.0:/home/david/.config/gtkrc-2.0'), ('PATH', '/opt/ros/foxy/bin:/home/david/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'), ('SESSION_MANAGER', 'local/david-kubuntu-desktop:@/tmp/.ICE-unix/1753,unix/david-kubuntu-desktop:/tmp/.ICE-unix/1753'), ('XDG_SESSION_PATH', '/org/freedesktop/DisplayManager/Session1'), ('BAMF_DESKTOP_FILE_HINT', '/var/lib/snapd/desktop/applications/code_code.desktop'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('XCURSOR_THEME', 'breeze_cursors'), ('GDK_BACKEND', 'x11'), ('DISPLAY', ':0'), ('LANG', 'de_DE.UTF-8'), ('XDG_CURRENT_DESKTOP', 'KDE'), ('XDG_SESSION_DESKTOP', 'KDE'), ('XAUTHORITY', '/run/user/1000/.Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('VSCODE_GIT_IPC_HANDLE', '/run/user/1000/vscode-git-e5be2255b3.sock'), ('TERM_PROGRAM', 'vscode'), ('SSH_AUTH_SOCK', '/tmp/ssh-keVn3aXFxUGB/agent.1644'), ('GSETTINGS_SCHEMA_DIR', '/snap/code/65/usr/share/glib-2.0/schemas'), ('AMENT_PREFIX_PATH', '/home/david/ros2_ws/install/py_pubsub:/home/david/ros2_ws/install/my_python_pkg:/home/david/ros2_ws/install/my_cpp_pkg:/opt/ros/foxy'), ('ORIGINAL_XDG_CURRENT_DESKTOP', 'KDE'), ('SHELL', '/bin/bash'), ('DISABLE_WAYLAND', '1'), ('QT_ACCESSIBILITY', '1'), ('NO_AT_BRIDGE', '1'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('XDG_VTNR', '1'), ('PWD', '/home/david/ros2_ws/src/gym_ped_sim/build/turtlebot3_social'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-plasma:/etc/xdg:/usr/share/kubuntu-default-settings/kf5-settings'), ('XDG_DATA_DIRS', '/usr/share/plasma:/usr/local/share:/usr/share:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/david/ros2_ws/install/py_pubsub/lib/python3.8/site-packages:/home/david/ros2_ws/install/my_python_pkg/lib/python3.8/site-packages:/opt/ros/foxy/lib/python3.8/site-packages'), ('BREAKPAD_DUMP_LOCATION', '/home/david/.config/Code/exthost Crash Reports'), ('KDE_SESSION_UID', '1000'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/home/david/ros2_ws/install/my_cpp_pkg')]), 'shell': False}
+[0.097914] (-) TimerEvent: {}
+[0.153109] (turtlebot3_social) StdoutLine: {'line': b'-- The C compiler identification is GNU 9.3.0\n'}
+[0.198086] (-) TimerEvent: {}
+[0.278626] (turtlebot3_social) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 9.3.0\n'}
+[0.289388] (turtlebot3_social) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc\n'}
+[0.298291] (-) TimerEvent: {}
+[0.399713] (-) TimerEvent: {}
+[0.437708] (turtlebot3_social) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc -- works\n'}
+[0.446570] (turtlebot3_social) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.499790] (-) TimerEvent: {}
+[0.567815] (turtlebot3_social) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[0.595279] (turtlebot3_social) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[0.596147] (turtlebot3_social) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[0.599980] (-) TimerEvent: {}
+[0.606274] (turtlebot3_social) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++\n'}
+[0.700341] (-) TimerEvent: {}
+[0.801549] (-) TimerEvent: {}
+[0.809279] (turtlebot3_social) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ -- works\n'}
+[0.814640] (turtlebot3_social) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[0.901619] (-) TimerEvent: {}
+[0.987575] (turtlebot3_social) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[1.001782] (-) TimerEvent: {}
+[1.020088] (turtlebot3_social) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[1.021699] (turtlebot3_social) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[1.041874] (turtlebot3_social) StderrLine: {'line': b'CMake Error at CMakeLists.txt:10 (find_package):\n'}
+[1.042166] (turtlebot3_social) StderrLine: {'line': b'  By not providing "Findcatkin.cmake" in CMAKE_MODULE_PATH this project has\n'}
+[1.042325] (turtlebot3_social) StderrLine: {'line': b'  asked CMake to find a package configuration file provided by "catkin", but\n'}
+[1.042401] (turtlebot3_social) StderrLine: {'line': b'  CMake did not find one.\n'}
+[1.042485] (turtlebot3_social) StderrLine: {'line': b'\n'}
+[1.042561] (turtlebot3_social) StderrLine: {'line': b'  Could not find a package configuration file provided by "catkin" with any\n'}
+[1.042629] (turtlebot3_social) StderrLine: {'line': b'  of the following names:\n'}
+[1.042693] (turtlebot3_social) StderrLine: {'line': b'\n'}
+[1.042765] (turtlebot3_social) StderrLine: {'line': b'    catkinConfig.cmake\n'}
+[1.042888] (turtlebot3_social) StderrLine: {'line': b'    catkin-config.cmake\n'}
+[1.043005] (turtlebot3_social) StderrLine: {'line': b'\n'}
+[1.043088] (turtlebot3_social) StderrLine: {'line': b'  Add the installation prefix of "catkin" to CMAKE_PREFIX_PATH or set\n'}
+[1.043158] (turtlebot3_social) StderrLine: {'line': b'  "catkin_DIR" to a directory containing one of the above files.  If "catkin"\n'}
+[1.043230] (turtlebot3_social) StderrLine: {'line': b'  provides a separate development package or SDK, be sure it has been\n'}
+[1.043291] (turtlebot3_social) StderrLine: {'line': b'  installed.\n'}
+[1.043347] (turtlebot3_social) StderrLine: {'line': b'\n'}
+[1.043404] (turtlebot3_social) StderrLine: {'line': b'\n'}
+[1.043462] (turtlebot3_social) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[1.043528] (turtlebot3_social) StdoutLine: {'line': b'See also "/home/david/ros2_ws/src/gym_ped_sim/build/turtlebot3_social/CMakeFiles/CMakeOutput.log".\n'}
+[1.048795] (turtlebot3_social) CommandEnded: {'returncode': 1}
+[1.094314] (turtlebot3_social) JobEnded: {'identifier': 'turtlebot3_social', 'rc': 1}
+[1.101978] (-) TimerEvent: {}
+[1.106921] (-) EventReactorShutdown: {}
