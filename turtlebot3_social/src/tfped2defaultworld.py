@@ -24,7 +24,7 @@ class MountTB2Ped(object):
         
 
     def callback(self, data):
-        for item in xrange(self.actor_number):
+        for item in range(self.actor_number):
             actor_idx_ = data.name.index(self.actor_name[:-1]+str(item))
             actor_pose_ = data.pose[actor_idx_].position
             actor_quat_ = self.quat_trans(data.pose[actor_idx_].orientation)
