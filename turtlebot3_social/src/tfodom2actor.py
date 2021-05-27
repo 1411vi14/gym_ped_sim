@@ -24,8 +24,7 @@ class MountTB2Ped(Node):
         self.model_sub = self.create_subscription(
             ModelStates,
             "/gazebo/model_states",
-            self.callback,
-            1)#1?
+            self.callback)
         self.br = tf2_ros.TransformBroadcaster()
         self.model_set = self.create_publisher(ModelState, "/gazebo/set_model_state", 1)
 
