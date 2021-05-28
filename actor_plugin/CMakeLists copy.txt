@@ -1,0 +1,70 @@
+cmake_minimum_required(VERSION 3.5)
+project(actor_plugin)
+
+# Default to C99
+if(NOT CMAKE_C_STANDARD)
+  set(CMAKE_C_STANDARD 99)
+endif()
+
+# Default to C++14
+if(NOT CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 14)
+endif()
+
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
+
+find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(actor_services REQUIRED)
+find_package(tf2_ros REQUIRED)
+find_package(std_msgs REQUIRED)
+
+find_package(geometry_msgs REQUIRED)#new
+find_package(builtin_interfaces REQUIRED)#new
+find_package(rosidl_default_generators REQUIRED)#new
+
+ament_export_include_directories(${roscpp_INCLUDE_DIRS})
+ament_export_include_directories(${actor_services_INCLUDE_DIRS})
+ament_export_include_directories(${tf_INCLUDE_DIRS})
+ament_export_include_directories(${std_msgs_INCLUDE_DIRS})
+#ament_export_include_directories("/user/include/sdformat-5.2")
+ament_export_include_directories(./include)
+find_package(gazebo REQUIRED)
+ament_export_include_directories(${GAZEBO_INCLUDE_DIRS})
+link_directories(${GAZEBO_LIBRARY_DIRS})#//ament_export_include_directories or ament_export_libraries ?
+list(APPEND CMAKE_CXX_FLAGS "${GAZEBO_CXX_FLAGS}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GAZEBO_CXX_FLAGS}")
+
+add_library(actorplugin_ros SHARED src/ActorPlugin_ros.cc)
+target_link_libraries(actorplugin_ros ${GAZEBO_LIBRARIES}  ${roscpp_LIBRARIES} ${tf_LIBRARIES})
+set_target_properties(actorplugin_ros PROPERTIES
+    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
+
+#new UNTEN
+#rosidl_generate_interfaces(${PROJECT_NAME}
+#${msg_files}
+#DEPENDENCIES std_msgs
+#)
+
+add_executable(actor_plugin src/ActorPlugin_ros.cc)
+ament_target_dependencies(actor_plugin rclcpp std_msgs)
+
+install(TARGETS
+    actor_plugin
+    DESTINATION lib/${PROJECT_NAME}
+)
+
+if(BUILD_TESTING)
+  find_package(ament_lint_auto REQUIRED)
+  # the following line skips the linter which checks for copyrights
+  # uncomment the line when a copyright and license is not present in all source files
+  #set(ament_cmake_copyright_FOUND TRUE)
+  # the following line skips cpplint (only works in a git repo)
+  # uncomment the line when this package is not in a git repo
+  #set(ament_cmake_cpplint_FOUND TRUE)
+  ament_lint_auto_find_test_dependencies()
+endif()
+
+ament_package()
