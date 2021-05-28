@@ -17,21 +17,24 @@
 
 #include <functional>
 #include <ignition/math.hh>
+#include <gazebo/gazebo.hh>
 #include <gazebo/physics/physics.hh>
-#include <gazebo/math/gzmath.hh>
-#include <std_msgs/Float32MultiArray.h>
-#include <geometry_msgs/Twist.h>
-#include <geometry_msgs/Pose.h>
+//#include <gazebo/math/gzmath.hh>//#include <gazebo/math/gzmath.hh> wurde nicht gefunden
+#include <memory>
+#include "rclcpp/rclcpp.hpp"
+#include "std_msgs/msg/float32_multi_array.hpp" //"std_msgs/msg/Float32MultiArray.hpp" <std_msgs/Float32MultiArray.h>
+#include <geometry_msgs/msg/twist.h>
+#include <geometry_msgs/msg/pose.h>
 #include <cassert>
 #include <cmath>
 #include <ctime>
 #include <chrono>
 #include "ActorPlugin.hh"
-#include <ros/console.h>
+//#include <ros/console.h>
 #include <iostream>
 #include <thread>
 #include <string>
-#include <ros/console.h> //roslogging
+//#include <ros/console.h> //roslogging
 
 #define PI 3.14159265359
 using namespace gazebo;
@@ -47,7 +50,7 @@ ActorPlugin::ActorPlugin()
 /////////////////////////////////////////////////
 void ActorPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
 {
-  this->actor = boost::dynamic_pointer_cast<physics::Actor>(_model);
+  this->actor = std::dynamic_pointer_cast<physics::Actor>(_model);
   this->world = this->actor->GetWorld();
   this->start_location = this->actor->WorldPose().Pos();
   this->connections.push_back(event::Events::ConnectWorldUpdateBegin(
