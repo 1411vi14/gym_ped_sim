@@ -1,0 +1,2 @@
+https://github.com/onlytailei/gym_ped_sim
+https://docs.ros.org/en/foxy/Contributing/Migration-Guide-Python.html
