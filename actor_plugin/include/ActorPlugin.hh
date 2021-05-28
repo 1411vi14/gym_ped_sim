@@ -24,11 +24,11 @@
 #include <thread>
 #include <actor_services/SetPose.h>
 #include <actor_services/GetVel.h>
-#include <ros/ros.h>
-#include <ros/callback_queue.h>
-#include <ros/subscribe_options.h>
+#include <ros2/ros.h>
+#include <ros2/callback_queue.h>
+#include <ros2/subscribe_options.h>
 #include <std_msgs/Float32MultiArray.h>
-#include <tf/transform_broadcaster.h>
+#include <tf2_ros/transform_broadcaster.h>
 
 #include <gazebo/common/Plugin.hh>
 #include <gazebo/physics/physics.hh>
