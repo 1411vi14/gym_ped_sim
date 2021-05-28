@@ -1,14 +1,20 @@
 cmake_minimum_required(VERSION 3.5)
 project(turtlebot3_social)
 
-## Add support for C++11, supported in ROS Kinetic and newer
-# add_definitions(-std=c++11)
+# Default to C++14
+if(NOT CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 14)
+endif()
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
 
-## Find catkin macros and libraries
-## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
-## is used, also find other catkin packages
+# Find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(ament_cmake_python REQUIRED)
 find_package(rclcpp REQUIRED)
+find_package(rclpy REQUIRED)
+
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -143,6 +149,8 @@ find_package(rclcpp REQUIRED)
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
+#add_executable(test_node src/my_cpp_node.cpp)
+#ament_target_dependencies(test_node rclcpp)
 
 #############
 ## Install ##
@@ -179,6 +187,17 @@ find_package(rclcpp REQUIRED)
 #   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 # )
 
+# Install Python modules
+ament_python_install_package(${PROJECT_NAME})
+
+# Install Python executables
+install(PROGRAMS
+  src/tfodom2actor.py
+  src/tfodom2defaultworld.py
+  src/tfped2defaultworld.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
 #############
 ## Testing ##
 #############
@@ -191,3 +210,4 @@ find_package(rclcpp REQUIRED)
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+ament_package()
