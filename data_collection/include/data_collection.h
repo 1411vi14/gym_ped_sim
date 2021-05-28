@@ -11,11 +11,11 @@
 #include <thread>
 #include <memory>
 #include <string>
-#include <sensor_msgs/LaserScan.h>
-#include <sensor_msgs/Image.h>
-#include <geometry_msgs/Twist.h>
+#include <sensor_msgs/msg/LaserScan.h>
+#include <sensor_msgs/msg/Image.h>
+#include <geometry_msgs/msg/Twist.h>
 #include <data_collection/DataCollectionService.h>
-#include <ros/ros.h>
+#include "rclcpp/rclcpp.hpp"
 
 namespace DC{
 
