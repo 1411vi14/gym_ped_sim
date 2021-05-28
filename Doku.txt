@@ -1,2 +1,4 @@
 https://github.com/onlytailei/gym_ped_sim
 https://docs.ros.org/en/foxy/Contributing/Migration-Guide-Python.html
+http://gazebosim.org/tutorials/?tut=plugins_hello_world#HelloWorldPlugin!
+https://docs.ros.org/en/foxy/Tutorials/Custom-ROS2-Interfaces.html
