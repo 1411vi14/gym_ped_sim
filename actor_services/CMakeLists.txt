@@ -1,17 +1,30 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.5)
 project(actor_services)
 
-## Add support for C++11, supported in ROS Kinetic and newer
-# add_definitions(-std=c++11)
+# Default to C99
+if(NOT CMAKE_C_STANDARD)
+  set(CMAKE_C_STANDARD 99)
+endif()
+
+# Default to C++14
+if(NOT CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 14)
+endif()
+
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(ament_cmake REQUIRED
-    rclcpp REQUIRED
-    message_generation
-    std_msgs
-    )
+  rclcpp REQUIRED
+  rclpy REQUIRED
+  std_msgs REQUIRED
+  builtin_interfaces
+  )
+find_package(rosidl_default_generators REQUIRED)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -31,20 +44,18 @@ find_package(ament_cmake REQUIRED
 ## * Let MSG_DEP_SET be the set of packages whose message types you use in
 ##   your messages/services/actions (e.g. std_msgs, actionlib_msgs, ...).
 ## * In the file package.xml:
-##   * add a build_depend tag for "message_generation"
+
 ##   * add a build_depend and a run_depend tag for each package in MSG_DEP_SET
 ##   * If MSG_DEP_SET isn't empty the following dependency has been pulled in
 ##     but can be declared for certainty nonetheless:
 ##     * add a run_depend tag for "message_runtime"
 ## * In this file (CMakeLists.txt):
-##   * add "message_generation" and every package in MSG_DEP_SET to
-##     find_package(catkin REQUIRED COMPONENTS ...)
+
 ##   * add "message_runtime" and every package in MSG_DEP_SET to
 ##     catkin_package(CATKIN_DEPENDS ...)
 ##   * uncomment the add_*_files sections below as needed
 ##     and list every .msg/.srv/.action file to be processed
-##   * uncomment the generate_messages entry below
-##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
+
 
 ## Generate messages in the 'msg' folder
 # add_message_files(
@@ -54,12 +65,12 @@ find_package(ament_cmake REQUIRED
 # )
 
 ## Generate services in the 'srv' folder
-add_service_files(
-  FILES
-  SetPose.srv
-  GetVel.srv
+#add_service_files(
+#  FILES
+#  SetPose.srv
+#  GetVel.srv
 #   Service2.srv
-)
+#)
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -69,10 +80,17 @@ add_service_files(
 # )
 
 ## Generate added messages and services with any dependencies listed here
-generate_messages(
-   DEPENDENCIES
-   std_msgs  # Or other packages containing msgs
-)
+#generate_messages(
+#   DEPENDENCIES
+#   std_msgs  # Or other packages containing msgs
+#)
+
+#https://docs.ros.org/en/foxy/Tutorials/Custom-ROS2-Interfaces.html
+rosidl_generate_interfaces(${PROJECT_NAME}
+  "srv/GetVel.srv"
+  "srv/SetPose.srv"
+  #DEPENDENCIES builtin_interfaces
+ )
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -182,6 +200,29 @@ generate_messages(
 #   # myfile2
 #   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 # )
+# Install Python modules
+ament_python_install_package(${PROJECT_NAME})
+
+# Install Python executables
+install(PROGRAMS
+  src/crossing_wall_1.py
+  src/crossing_wall_3.py
+  src/crossing_wall_4.py
+  src/crossing_wall.py
+  src/overtaking_wall_1.py
+  src/overtaking_wall_4.py
+  src/overtaking_wall.py
+  src/passing_wall_1.py
+  src/passing_wall_3_2.py
+  src/passing_wall_3.py
+  src/passing_wall_4.py
+  src/passing_wall.py
+  src/random_create.py
+  srv/GetVel.srv
+  srv/SetPose.srv
+
+  DESTINATION lib/${PROJECT_NAME}
+)
 
 #############
 ## Testing ##
@@ -195,3 +236,4 @@ generate_messages(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+ament_package()
